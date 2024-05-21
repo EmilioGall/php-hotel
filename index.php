@@ -40,6 +40,16 @@ $hotels = [
 
 ];
 
+function vote_filter($array, $selected_vote)
+{
+   return ($array['vote'] >= $selected_vote);
+};
+
+function parking_filter($array, $selected_parking)
+{
+   return ($array['parking'] === $selected_parking);
+};
+
 ?>
 
 
