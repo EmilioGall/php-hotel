@@ -61,6 +61,42 @@ $hotels = [
 
 <body>
 
+   <div class="container-md">
+
+      <h1 class="text-primary text-center my-3">Hotels List</h1>
+
+      <table class="table table-hover">
+
+         <thead>
+
+            <tr class="border">
+               <th scope="col">Hotel Name</th>
+               <th scope="col">Vote</th>
+               <th scope="col">Distance to City Center</th>
+               <th scope="col">Parking</th>
+               <th scope="col">Description</th>
+            </tr>
+
+         </thead>
+
+         <tbody>
+
+            <tr>
+
+               <td scope="row">Name</td>
+               <td>stars</td>
+               <td>Km</td>
+               <td>true/false</td>
+               <td>text</td>
+
+            </tr>
+
+         </tbody>
+
+      </table>
+
+   </div>
+
 </body>
 
 </html>
