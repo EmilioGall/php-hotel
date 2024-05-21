@@ -88,6 +88,7 @@ function parking_filter($array, $selected_parking)
 
          <form class="row justify-content-between" action="index.php" method="GET">
 
+            <!-- Forms Inputs -->
             <div class="col-8 row align-items-center">
 
                <!-- Select Vote -->
@@ -99,7 +100,7 @@ function parking_filter($array, $selected_parking)
 
                      <?php for ($i = 0; $i < 5; $i++) { ?>
 
-                        <option value="<?php echo $i+1?>">
+                        <option value="<?php echo $i + 1 ?>">
                            <?php for ($n = 0; $n <= $i; $n++) {
 
                               echo '&starf;';
@@ -124,9 +125,17 @@ function parking_filter($array, $selected_parking)
                <!-- /Check for Parking -->
 
             </div>
+            <!-- /Forms Inputs -->
 
+            <!-- Forms Buttons -->
+            <div class="col-2 row justify-content-between">
 
-            <button type="submit" class="btn btn-primary col-1">Filter</button>
+               <button type="submit" class="btn btn-primary col-6">Filter</button>
+
+               <button type="reset" class="btn btn-secondary col-5">Reset</button>
+
+            </div>
+            <!-- /Forms Buttons -->
 
          </form>
 
