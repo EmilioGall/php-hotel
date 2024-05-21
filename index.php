@@ -40,21 +40,28 @@ $hotels = [
 
 ];
 
-// $selected_parking = $_GET['parking_check'];
+$selected_parking = empty($_GET['user_check_parking']);
 
-function vote_filter($array, $selected_vote)
+$selected_vote = $_GET['user_selected_vote'];
+
+
+function vote_filter($array, $vote_number)
 {
-   return ($array['vote'] >= $selected_vote);
+   return ($array['vote'] >= $vote_number);
 };
 
-function parking_filter($array, $selected_parking)
+function parking_filter($array, $parking_boolean)
 {
-   return ($array['parking'] === $selected_parking);
+   return ($array['parking'] === $parking_boolean);
 };
 
-// var_dump($selected_parking);
+var_dump($selected_parking);
+
+var_dump($selected_vote);
+
 
 ?>
+
 <?php ?>
 
 <!DOCTYPE html>
@@ -94,7 +101,7 @@ function parking_filter($array, $selected_parking)
                <!-- Select Vote -->
                <div class="col-4">
 
-                  <select class="form-select" aria-label="Default select example">
+                  <select class="form-select" aria-label="Default select example" name="user_selected_vote">
 
                      <option selected>Select a minimum vote</option>
 
@@ -117,9 +124,9 @@ function parking_filter($array, $selected_parking)
                <!-- Check for Parking -->
                <div class="col-4 form-check">
 
-                  <input type="checkbox" class="form-check-input" id="parking_check">
+                  <input type="checkbox" class="form-check-input" id="parking_check" name="user_check_parking">
 
-                  <label class="form-check-label" for="parking_check" name="parking_check"> Check for Parking </label>
+                  <label class="form-check-label" for="parking_check"> Check for Parking </label>
 
                </div>
                <!-- /Check for Parking -->
