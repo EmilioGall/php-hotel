@@ -55,7 +55,7 @@ function parking_filter($array, $selected_parking)
 // var_dump($selected_parking);
 
 ?>
-
+<?php ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -97,12 +97,16 @@ function parking_filter($array, $selected_parking)
 
                      <option selected>Select a minimum vote</option>
 
-                     <option value="1">
-                        <?php for ($i = 0; $i < 1; $i++) {
+                     <?php for ($i = 0; $i < 5; $i++) { ?>
 
-                           echo '&starf;';
-                        } ?>
-                     </option>
+                        <option value="<?php echo $i+1?>">
+                           <?php for ($n = 0; $n <= $i; $n++) {
+
+                              echo '&starf;';
+                           } ?>
+                        </option>
+
+                     <?php } ?>
 
                   </select>
 
