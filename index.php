@@ -40,6 +40,8 @@ $hotels = [
 
 ];
 
+// $selected_parking = $_GET['parking_check'];
+
 function vote_filter($array, $selected_vote)
 {
    return ($array['vote'] >= $selected_vote);
@@ -49,6 +51,8 @@ function parking_filter($array, $selected_parking)
 {
    return ($array['parking'] === $selected_parking);
 };
+
+// var_dump($selected_parking);
 
 ?>
 
@@ -79,84 +83,138 @@ function parking_filter($array, $selected_parking)
 
       <h1 class="text-primary text-center mt-5 mb-3">Hotels List</h1>
 
-      <table class="table table-hover">
+      <!-- Form Section -->
+      <section>
 
-         <!-- Table Header -->
-         <thead>
+         <form class="row justify-content-between" action="index.php" method="GET">
 
-            <tr>
+            <div class="col-8 row align-items-center">
 
-               <th scope="col">Hotel Name</th>
+               <!-- Select Vote -->
+               <div class="col-4">
 
-               <th scope="col" class="text-center">Vote</th>
+                  <select class="form-select" aria-label="Default select example">
 
-               <th scope="col" class="text-center">Distance to City Center</th>
+                     <option selected>Select a minimum vote</option>
 
-               <th scope="col" class="text-center">Parking</th>
+                     <option value="1">
+                        <?php for ($i = 0; $i < 1; $i++) {
 
-               <th scope="col">Description</th>
+                           echo '&starf;';
+                        } ?>
+                     </option>
 
-               <th scope="col"></th>
+                  </select>
 
-            </tr>
+               </div>
+               <!-- /Select Vote -->
 
-         </thead>
-         <!-- Table Header -->
+               <!-- Check for Parking -->
+               <div class="col-4 form-check">
 
-         <tbody>
+                  <input type="checkbox" class="form-check-input" id="parking_check">
 
-            <?php foreach ($hotels as $feature => $hotel) { ?>
+                  <label class="form-check-label" for="parking_check" name="parking_check"> Check for Parking </label>
+
+               </div>
+               <!-- /Check for Parking -->
+
+            </div>
+
+
+            <button type="submit" class="btn btn-primary col-1">Filter</button>
+
+         </form>
+
+      </section>
+      <!-- /Form Section -->
+
+      <!-- Table Section -->
+      <section>
+
+         <table class="table table-hover">
+
+            <!-- Table Header -->
+            <thead>
+
                <tr>
 
-                  <!-- Name Cell -->
-                  <td scope="row"><?php echo $hotel['name'] ?></td>
-                  <!-- /Name Cell -->
+                  <th scope="col">Hotel Name</th>
 
-                  <!-- Vote Cell -->
-                  <td class="text-center">
+                  <th scope="col" class="text-center">Vote</th>
 
-                     <?php for ($i = 0; $i < 5; $i++) {
+                  <th scope="col" class="text-center">Distance to City Center</th>
 
-                        if ($i < $hotel['vote']) {
+                  <th scope="col" class="text-center">Parking</th>
 
-                           echo '<span><i class="fa-solid fa-star text-warning"></i></span>';
-                        } else {
+                  <th scope="col">Description</th>
 
-                           echo '<span><i class="fa-regular fa-star text-warning"></i></span>';
-                        }
-                     } ?>
-
-                  </td>
-                  <!-- /Vote Cell -->
-
-                  <!-- Distance City Center Cell -->
-                  <td class="text-center"><?php echo $hotel['distance_to_center'] ?> Km</td>
-                  <!-- /Distance City Center Cell -->
-
-                  <!-- Parking Cell -->
-                  <td class="text-center">
-
-                     <?php if ($hotel['parking']) {
-
-                        echo '<span><i class="fa-solid fa-check text-success"></i></span>';
-                     } else {
-
-                        echo '<span><i class="fa-solid fa-xmark text-danger"></i></span>';
-                     } ?>
-
-                  </td>
-                  <!-- /Parking Cell -->
-
-                  <!-- Description Cell -->
-                  <td colspan="2"><?php echo $hotel['description'] ?></td>
-                  <!-- /Description Cell -->
+                  <th scope="col"></th>
 
                </tr>
-            <?php } ?>
 
-         </tbody>
+            </thead>
+            <!-- Table Header -->
 
-      </table>
+            <!-- Table Body -->
+            <tbody>
+
+               <?php foreach ($hotels as $feature => $hotel) { ?>
+                  <tr>
+
+                     <!-- Name Cell -->
+                     <td scope="row"><?php echo $hotel['name'] ?></td>
+                     <!-- /Name Cell -->
+
+                     <!-- Vote Cell -->
+                     <td class="text-center">
+
+                        <?php for ($i = 0; $i < 5; $i++) {
+
+                           if ($i < $hotel['vote']) {
+
+                              echo '<span><i class="fa-solid fa-star text-warning"></i></span>';
+                           } else {
+
+                              echo '<span><i class="fa-regular fa-star text-warning"></i></span>';
+                           }
+                        } ?>
+
+                     </td>
+                     <!-- /Vote Cell -->
+
+                     <!-- Distance City Center Cell -->
+                     <td class="text-center"><?php echo $hotel['distance_to_center'] ?> Km</td>
+                     <!-- /Distance City Center Cell -->
+
+                     <!-- Parking Cell -->
+                     <td class="text-center">
+
+                        <?php if ($hotel['parking']) {
+
+                           echo '<span><i class="fa-solid fa-check text-success"></i></span>';
+                        } else {
+
+                           echo '<span><i class="fa-solid fa-xmark text-danger"></i></span>';
+                        } ?>
+
+                     </td>
+                     <!-- /Parking Cell -->
+
+                     <!-- Description Cell -->
+                     <td colspan="2"><?php echo $hotel['description'] ?></td>
+                     <!-- /Description Cell -->
+
+                  </tr>
+               <?php } ?>
+
+            </tbody>
+            <!-- /Table Body -->
+
+         </table>
+
+      </section>
+      <!-- /Table Section -->
 
    </div>
 
