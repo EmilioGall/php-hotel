@@ -1,3 +1,5 @@
+<?php ?>
+
 <?php
 
 $hotels = [
@@ -42,7 +44,49 @@ $hotels = [
 
 $selected_parking = empty($_GET['user_check_parking']);
 
-$selected_vote = $_GET['user_selected_vote'];
+$selected_vote = intval($_GET['user_selected_vote']);
+
+var_dump($selected_parking);
+
+var_dump($selected_vote);
+
+$filtered_hotels = $hotels;
+
+if (isset($_GET['user_check_parking']) && !empty($_GET['user_check_parking'])) {
+
+   $tmp_hotels = [];
+
+   foreach ($filtered_hotels as $hotel) {
+
+      if (!empty($_GET['user_check_parking']) === $hotel['parking']) {
+
+         $tmp_hotels[] = $hotel;
+      }
+   }
+
+   $filtered_hotels = $tmp_hotels;
+}
+
+var_dump($filtered_hotels);
+
+if (isset($_GET['user_selected_vote'])) {
+
+   $selected_vote = intval($_GET['user_selected_vote']);
+
+   $tmp_hotels = [];
+
+   foreach ($filtered_hotels as $hotel) {
+
+      if ($selected_vote <= $hotel['vote']) {
+
+         $tmp_hotels[] = $hotel;
+      }
+   }
+
+   $filtered_hotels = $tmp_hotels;
+}
+
+var_dump($filtered_hotels);
 
 
 function vote_filter($array, $vote_number)
@@ -55,14 +99,8 @@ function parking_filter($array, $parking_boolean)
    return ($array['parking'] === $parking_boolean);
 };
 
-var_dump($selected_parking);
-
-var_dump($selected_vote);
-
-
 ?>
 
-<?php ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -101,9 +139,9 @@ var_dump($selected_vote);
                <!-- Select Vote -->
                <div class="col-4">
 
-                  <select class="form-select" aria-label="Default select example" name="user_selected_vote">
+                  <select class="form-select" aria-label="Select a vote" name="user_selected_vote">
 
-                     <option selected>Select a minimum vote</option>
+                     <option value="0" selected>Select a minimum vote</option>
 
                      <?php for ($i = 0; $i < 5; $i++) { ?>
 
@@ -126,7 +164,7 @@ var_dump($selected_vote);
 
                   <input type="checkbox" class="form-check-input" id="parking_check" name="user_check_parking">
 
-                  <label class="form-check-label" for="parking_check"> Check for Parking </label>
+                  <label class="form-check-label" for="parking_check"> Only with Parking </label>
 
                </div>
                <!-- /Check for Parking -->
@@ -169,8 +207,6 @@ var_dump($selected_vote);
 
                   <th scope="col">Description</th>
 
-                  <th scope="col"></th>
-
                </tr>
 
             </thead>
@@ -179,7 +215,7 @@ var_dump($selected_vote);
             <!-- Table Body -->
             <tbody>
 
-               <?php foreach ($hotels as $feature => $hotel) { ?>
+               <?php foreach ($filtered_hotels as $feature => $hotel) { ?>
                   <tr>
 
                      <!-- Name Cell -->
